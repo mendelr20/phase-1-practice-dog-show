@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchRequest(){
         fetch('http://localhost:3000/dogs')
         .then(res => res.json())
-        .then(appendDom)
+        .then((dogsArray) => {
+            appendDom(dogsArray)
+        })
     }
     
     function appendDom(dogsArray){
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td><button>Edit</button></td>
             </tr> `
             tableBody.append(table)
-            const editBtn = document.querySelector('button')
+            let editBtn = document.querySelector('button')
             editBtn.addEventListener('click', () => {
                 console.log('You have clicked')
             })
