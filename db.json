@@ -2,7 +2,7 @@
   "dogs": [
     {
       "id": 1,
-      "name": "Mendel Rosenblum",
+      "name": "Baby",
       "breed": "Scottish Deerhound",
       "sex": "male",
       "isGoodDog": false
@@ -126,3 +126,4 @@
     }
   ]
 }
+
