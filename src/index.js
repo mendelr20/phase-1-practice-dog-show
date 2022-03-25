@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function fetchRequest(){
-    fetch(url)
+    return fetch(url)
     .then(res => res.json())
     .then(arrayOfDogs => {
         arrayOfDogs.forEach(dog => renderDom(dog))
@@ -33,6 +33,7 @@ function renderDom(dog){
         dogForm.name.value = dog.name
         dogForm.breed.value = dog.breed
         dogForm.sex.value = dog.sex
+        let id = dog.id
         const dogName = document.getElementsByName('name')
         let inputName
         dogName[0].addEventListener('change', (event) => {
@@ -48,6 +49,7 @@ function renderDom(dog){
         dogSex[0].addEventListener('change', (event) => {
             inputSex= event.target.value
         })
+        
         dogForm.addEventListener('submit', (e) => {
             e.preventDefault()
             submitEvent(id, inputName, inputBreed, inputSex)
@@ -67,9 +69,13 @@ function renderDom(dog){
                 })
             })
             .then(res => res.json())
-            .then(arrayOfDogs => {
-                arrayOfDogs.forEach(dog => renderDom(dog))
+            
+            .then(()=>{
+                const tableBody = document.querySelector('#table-body')
+                tableBody.innerHTML = ''
+                fetchRequest()
             })
+            
     }
 
 
