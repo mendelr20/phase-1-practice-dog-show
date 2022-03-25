@@ -30,24 +30,40 @@ function renderDom(dog){
     tableBody.append(tr)
     button.addEventListener('click', () =>{
         const dogForm = document.querySelector('#dog-form')
-        const formName = dogForm.name.value = dog.name
-        const formBreed = dogForm.breed.value = dog.breed
-        const formSex = dogForm.sex.value = dog.sex
+        dogForm.name.value = dog.name
+        dogForm.breed.value = dog.breed
+        dogForm.sex.value = dog.sex
+        const dogName = document.getElementsByName('name')
+        let inputName
+        dogName[0].addEventListener('change', (event) => {
+            inputName = event.target.value
+        })
+        const dogBreed = document.getElementsByName('breed')
+        let inputBreed
+        dogBreed[0].addEventListener('change', (event) => {
+            inputBreed = event.target.value
+        })
+        const dogSex = document.getElementsByName('sex')
+        let inputSex
+        dogSex[0].addEventListener('change', (event) => {
+            inputSex= event.target.value
+        })
         dogForm.addEventListener('submit', (e) => {
             e.preventDefault()
-            submitEvent(formName, formBreed, formSex)
+            submitEvent(id, inputName, inputBreed, inputSex)
         })
     })
+   
     // use the dog id to complete the submit event
-    function submitEvent(formName, formBreed, formSex){
-        fetch('http://localhost:3000/dogs/:id', {
+    function submitEvent(id, inputName, inputBreed, inputSex){
+        fetch(`http://localhost:3000/dogs/${id}`, {
                 method: "PATCH",
                 headers: {"Accept": "application/json",
                     "Content-type": "application/json"},
                 body: JSON.stringify({
-                    name : formName,
-                    breed : formBreed,
-                    sex : formSex
+                    name : inputName,
+                    breed : inputBreed,
+                    sex : inputSex
                 })
             })
             .then(res => res.json())
